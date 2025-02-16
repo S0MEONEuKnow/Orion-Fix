@@ -38,11 +38,11 @@ if not Success then
 end	
 
 local function GetIcon(IconName)
-	if Icons[IconName] ~= nil then
-		return Icons[IconName][1]
-	else
-		return nil
-	end
+local abcde12345 = nil
+	pcall(function()
+	abcde12345 = Icons[IconName][1]
+	end)
+return abcde12345
 end   
 
 local Orion = Instance.new("ScreenGui")

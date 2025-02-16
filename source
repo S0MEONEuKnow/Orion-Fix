@@ -38,6 +38,8 @@ if not Success then
 end	
 
 local function GetIcon(name : string)
+	local asset
+pcall(function()
 	name = string.match(string.lower(name), "^%s*(.*)%s*$") :: string
 	local sizedicons = Icons['48px']
 
@@ -56,13 +58,13 @@ local function GetIcon(name : string)
 	local irs = Vector2.new(rirs[1], rirs[2])
 	local iro = Vector2.new(riro[1], riro[2])
 
-	local asset = {
+	asset = {
 		id = r[1],
 		imageRectSize = irs,
 		imageRectOffset = iro,
 	}
-
-	return asset
+end)
+	return asset or nil
 end
 
 local Orion = Instance.new("ScreenGui")

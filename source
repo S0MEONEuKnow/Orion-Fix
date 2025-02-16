@@ -30,20 +30,40 @@ local OrionLib = {
 local Icons = {}
 
 local Success, Response = pcall(function()
-	Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/latte-soft/lucide-roblox/refs/heads/master/lib/Icons.luau"))()["48px"]
+	Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/latte-soft/lucide-roblox/refs/heads/master/lib/Icons.luau"))()
 end)
 
 if not Success then
 	warn("\nOrion Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
 end	
 
-local function GetIcon(IconName)
-	if Icons[IconName] ~= nil then
-		return Icons[IconName][1]
-	else
-		return nil
+local function getIcon(name : string)
+	name = string.match(string.lower(name), "^%s*(.*)%s*$") :: string
+	local sizedicons = Icons['48px']
+
+	local r = sizedicons[name]
+	if not r then
+		error(`Lucide Icons: Failed to find icon by the name of "{name}"`, 2)
 	end
-end  
+
+	local rirs = r[2]
+	local riro = r[3]
+
+	if type(r[1]) ~= "number" or type(rirs) ~= "table" or type(riro) ~= "table" then
+		error("Lucide Icons: Internal error: Invalid auto-generated asset entry")
+	end
+
+	local irs = Vector2.new(rirs[1], rirs[2])
+	local iro = Vector2.new(riro[1], riro[2])
+
+	local asset = {
+		id = r[1],
+		imageRectSize = irs,
+		imageRectOffset = iro,
+	}
+
+	return asset
+end
 
 local Orion = Instance.new("ScreenGui")
 Orion.Name = "Orion"

@@ -69,10 +69,7 @@ end
 
 local Orion = Instance.new("ScreenGui")
 Orion.Name = "Orion"
-if syn.protect_gui then 
-	syn.protect_gui(Orion)
-	Orion.Parent = game.CoreGui
-elseif game.CoreGui:FindFirstChild("RobloxGui") then
+if game.CoreGui:FindFirstChild("RobloxGui") then
 	Orion.Parent = game.CoreGui:FindFirstChild("RobloxGui")
 else
 	Orion.Parent = game.CoreGui:FindFirstChild("RobloxGui")

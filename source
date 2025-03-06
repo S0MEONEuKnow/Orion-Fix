@@ -69,24 +69,17 @@ end
 
 local Orion = Instance.new("ScreenGui")
 Orion.Name = "Orion"
-if gethui then
-	Orion.Parent = gethui()
-elseif syn.protect_gui then 
+if syn.protect_gui then 
 	syn.protect_gui(Orion)
 	Orion.Parent = game.CoreGui
 elseif game.CoreGui:FindFirstChild("RobloxGui") then
 	Orion.Parent = game.CoreGui:FindFirstChild("RobloxGui")
 else
-	Orion.Parent = game.CoreGui
+	Orion.Parent = game.CoreGui:FindFirstChild("RobloxGui")
 end
 
 function OrionLib:IsRunning()
-	if gethui then
-		return Orion.Parent == gethui()
-	else
-		return Orion.Parent == game:GetService("CoreGui")
-	end
-
+		return Orion.Parent == game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 end
 
 local function AddConnection(Signal, Function)

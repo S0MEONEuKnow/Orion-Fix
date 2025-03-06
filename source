@@ -346,7 +346,10 @@ CreateElement("Image", function(ImageID)
 	})
 
 	if GetIcon(ImageID) ~= nil then
-		ImageNew.Image = GetIcon(ImageID)
+		local asset = GetIcon(ImageID)
+				ImageNew.Image = 'rbxassetid://'..asset.id
+				ImageNew.ImageRectOffset = asset.imageRectOffset
+				ImageNew.ImageRectSize = asset.imageRectSize
 	end	
 
 	return ImageNew
@@ -749,7 +752,10 @@ function OrionLib:MakeWindow(WindowConfig)
 		})
 
 		if GetIcon(TabConfig.Icon) ~= nil then
-			TabFrame.Ico.Image = GetIcon(TabConfig.Icon)
+local asset = GetIcon(TabConfig.Icon)
+				TabFrame.Ico.Image = 'rbxassetid://'..asset.id
+				TabFrame.Ico.ImageRectOffset = asset.imageRectOffset
+				TabFrame.Ico.ImageRectSize = asset.imageRectSize
 		end	
 
 		local Container = AddThemeObject(SetChildren(SetProps(MakeElement("ScrollFrame", Color3.fromRGB(255, 255, 255), 5), {
